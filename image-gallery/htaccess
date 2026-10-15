@@ -1,0 +1,27 @@
+# Block direct browser access to all sensitive files
+
+<Files "credentials.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "oauth_credentials.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "token.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "drive.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+

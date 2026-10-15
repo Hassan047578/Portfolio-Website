@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hassan Wazir | Sign Up</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            color: black;
+        }
+
+        /* ── Nav ── */
+        header {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            font-size: x-large;
+            color: black;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #0a121c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #2ca8dd;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            border: 1px solid #e838f8;
+            color: #e838f8;
+        }
+
+        .signup-btn {
+            background: #e838f8;
+            color: white;
+        }
+
+        .makecv-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            background: purple;
+            color: white !important;
+            border: 2px solid purple;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .makecv-btn:hover {
+            background: transparent;
+            color: purple !important;
+        }
+
+        /* ── Page Section ── */
+        .page-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0 30px;
+        }
+
+        /* ── Signup Card ── */
+        .signup-card {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(128, 0, 128, 0.15);
+            padding: 36px 32px;
+            color: black;
+            text-align: center;
+        }
+
+        .signup-card .icon {
+            width: 60px;
+            height: 60px;
+            background: purple;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 16px;
+        }
+
+        .signup-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: black;
+            margin-bottom: 6px;
+        }
+
+        .signup-card h2 span {
+            color: purple;
+        }
+
+        .signup-card p.subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 11px 14px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(128, 0, 128, 0.3);
+            border-radius: 10px;
+            font-size: 14px;
+            color: #222;
+            background: rgba(255, 255, 255, 0.8);
+            outline: none;
+            transition: border-color 0.3s;
+            text-align: left;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: purple;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 11px;
+            background: purple;
+            color: white;
+            border: 2px solid purple;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 4px;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: purple;
+        }
+
+        .footer-text {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .footer-text a {
+            color: purple;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        #result {
+            display: block;
+            margin-top: 12px;
+            font-size: 13px;
+            text-align: center;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        #result.success {
+            color: green;
+            background: rgba(0, 128, 0, 0.08);
+        }
+
+        #result.error {
+            color: red;
+            background: rgba(255, 0, 0, 0.08);
+        }
+
+        /* ── Footer ── */
+        footer {
+            width: 500px;
+            border: 1px solid purple;
+            border-radius: 20px;
+            text-align: center;
+            padding: 15px 20px;
+            background: purple;
+            color: white;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        footer ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer ul li {
+            word-break: break-word;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- <div class="container">
+            <nav> -->
+                <!-- <ul id="menu">
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="tutorial.php">Tutorials</a></li>
+                    <li><a href="public_gallery.php">Gallery</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="QR.php">QR</a></li>
+                    <li><a href="chatting/index.php">Chat</a></li>
+                    <li><a href="location/location.php">Location</a></li>
+                </ul> -->
+                <div class="auth-buttons">
+                    <!-- <a href="cv_maker/bio.php" class="makecv-btn">Make CV</a> -->
+                    <!-- <a href="login.php" class="login-btn">Login</a>
+                    <a href="signup.php" class="signup-btn">Signup</a> -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-section">
+        <div class="signup-card">
+
+            <div class="icon">✨</div>
+            <h2>Create <span>Account</span></h2>
+            <p class="subtitle">Join us today — it's completely free</p>
+
+            <input type="text"     name="user_name"     id="user_name"     placeholder="Full Name">
+            <input type="email"    name="user_email"    id="user_email"    placeholder="email@gmail.com">
+            <input type="password" name="user_password" id="user_password" placeholder="Password">
+
+            <button type="button" class="submit-btn" onclick="sendvalue()">Sign Up</button>
+
+            <span id="result"></span>
+
+            <p class="footer-text">Already have an account? <a href="index.php">Login</a></p>
+
+        </div>
+    </section>
+
+    <!-- <footer>
+        <ul>
+            <li>hassanqadri047@gmail.com</li>
+            <li>Nankana Sahib</li>
+        </ul>
+    </footer> -->
+
+    <script>
+        function sendvalue() {
+            const name     = $('#user_name').val().trim();
+            const email    = $('#user_email').val().trim();
+            const password = $('#user_password').val().trim();
+
+            if (!name || !email || !password) {
+                $('#result').removeClass('success').addClass('error').text('Please fill in all fields.');
+                return;
+            }
+
+            $.ajax({
+                url: 'signup_backend.php',
+                method: 'POST',
+                data: {
+                    user_name: name,
+                    user_email: email,
+                    user_password: password
+                },
+                success: function(response) {
+                    $('#result').removeClass('error').addClass('success').text('You are signed up successfully!');
+                },
+                error: function() {
+                    $('#result').removeClass('success').addClass('error').text('Something went wrong. Please try again.');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
